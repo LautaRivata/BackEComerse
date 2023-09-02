@@ -1,8 +1,8 @@
-const { DataTypes } = require("sequelize")
+const { Model, DataTypes } = require("sequelize")
 import { sequelize } from "../conection"
 
-const User = sequelize.define(
-	"users",
+class Users extends Model {}
+Users.init(
 	{
 		idusers: { type: DataTypes.BIGINT, primaryKey: true },
 		username: { type: DataTypes.STRING, allowNull: false, unique: true },
@@ -14,7 +14,9 @@ const User = sequelize.define(
 		isEnabled: { type: DataTypes.STRING, allowNull: false },
 		gerarquia: { type: DataTypes.STRING, allowNull: false },
 	},
-	{ freezeTableName: true, timestamps: false }
+	{ sequelize, modelName: "users" }
 )
 
-export { User }
+export { Users }
+
+// freezeTableName: true, timestamps: false

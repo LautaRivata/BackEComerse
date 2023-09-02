@@ -1,8 +1,8 @@
 "use strict"
 
 import { Router } from "express"
-import { getProductsMiddleware } from "../middlewares"
-import { getProductsController } from "../controllers"
+import { getProductsMiddleware, postProductsMiddleware } from "../middlewares"
+import { getProductsController, postProductsController } from "../controllers"
 
 const router = Router()
 
@@ -12,4 +12,5 @@ const productsRoutes = router.get(
 	getProductsController
 )
 
+router.post("/", postProductsMiddleware, postProductsController)
 export default productsRoutes

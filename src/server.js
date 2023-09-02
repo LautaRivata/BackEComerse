@@ -10,6 +10,8 @@ const bodyParser = require("body-parser")
 const session = require("express-session")
 const cors = require("cors")
 const path = require("path")
+const Products = require("../db/models/Products")
+const Users = require("../db/models/Users")
 
 const app = express()
 const PORT = 8080
@@ -40,12 +42,11 @@ app.use("/api/users", usersRoutes)
 app.listen(PORT, () => {
 	console.log("Listening in port", PORT)
 	sequelize
-		.authenticate()
+		.sync({ force: false })
 		.then(() => {
 			console.log("DBConectada")
 		})
 		.catch(() => {
-			s
 			console.log("Error en DB")
 		})
 })
