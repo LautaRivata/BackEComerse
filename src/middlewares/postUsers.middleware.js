@@ -3,11 +3,6 @@
 const { Users } = require("../../db/models/Users")
 const { validationResult } = require("express-validator")
 
-const newUserValidator = function (newUser) {
-	console.log(newUser)
-	return false
-}
-
 /**
  *
  * @param {import("express").Request & { dataToSend: *, status: 200 | 400 }} req

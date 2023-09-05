@@ -1,8 +1,12 @@
 "use strict"
 
 import { Router } from "express"
-import { getUsersByIdMiddleware, postUsersMiddleware } from "../middlewares"
-import { getUsersByIdController, postUsersController } from "../controllers"
+import {
+	getUsersByIdMiddleware,
+	postUsersMiddleware,
+	postLoginMiddleware,
+} from "../middlewares"
+import { postUsersController } from "../controllers"
 const { check, body, validationResult } = require("express-validator")
 
 const router = Router()
@@ -10,20 +14,26 @@ const router = Router()
 const usersRoutes = router.get(
 	"/:id?",
 	getUsersByIdMiddleware,
-	getUsersByIdController
+	postUsersController
 )
 
 router.post(
 	"/",
 	[
-		body("idusers").isNumeric(),
 		body("username").notEmpty(),
-		body("userpass").isAlphanumeric().isLength({ min: 8, max: 40 }),
+		body("userpass").notEmpty(),
 		body("name").notEmpty(),
 		body("email").isEmail(),
 		body("address").notEmpty(),
 	],
 	postUsersMiddleware,
+	postUsersController
+)
+
+router.post(
+	"/login",
+	[body("username").notEmpty(), body("userpass").notEmpty()],
+	postLoginMiddleware,
 	postUsersController
 )
 

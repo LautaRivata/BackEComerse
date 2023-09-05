@@ -3,6 +3,7 @@ import postOrderMiddleware from "./postOrder.middleware"
 import getUsersByIdMiddleware from "./getUsersById.middleware"
 import postUsersMiddleware from "./postUsers.middleware"
 import postProductsMiddleware from "./postProducts.middleware"
+import postLoginMiddleware from "./postLogin.middleware"
 
 export {
 	getProductsMiddleware,
@@ -10,4 +11,5 @@ export {
 	getUsersByIdMiddleware,
 	postUsersMiddleware,
 	postProductsMiddleware,
+	postLoginMiddleware,
 }

@@ -4,7 +4,11 @@ import { sequelize } from "../conection"
 class Users extends Model {}
 Users.init(
 	{
-		idusers: { type: DataTypes.BIGINT, primaryKey: true },
+		idusers: {
+			type: DataTypes.BIGINT,
+			primaryKey: true,
+			autoIncrement: true,
+		},
 		username: { type: DataTypes.STRING, allowNull: false, unique: true },
 		userpass: { type: DataTypes.STRING, allowNull: false },
 		name: { type: DataTypes.STRING, allowNull: false },
