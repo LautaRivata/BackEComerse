@@ -2,7 +2,12 @@
 
 import express from "express"
 import morgan from "morgan"
-import { ordersRoutes, productsRoutes, usersRoutes } from "./routes"
+import {
+	ordersRoutes,
+	productsRoutes,
+	usersRoutes,
+	generarDBRoutes,
+} from "./routes"
 import { sequelize } from "../db/conection"
 
 const cookieParser = require("cookie-parser")
@@ -38,6 +43,7 @@ app.use(cors())
 app.use("/api/products", productsRoutes)
 app.use("/api/orders", ordersRoutes)
 app.use("/api/users", usersRoutes)
+app.use("/api/generarDB", generarDBRoutes)
 
 app.listen(PORT, () => {
 	console.log("Listening in port", PORT)
@@ -49,4 +55,5 @@ app.listen(PORT, () => {
 		.catch(() => {
 			console.log("Error en DB")
 		})
+	console.log(session.user)
 })

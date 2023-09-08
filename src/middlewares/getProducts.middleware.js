@@ -1,7 +1,6 @@
 "use strict"
 
 const { Products } = require("../../db/models/Products")
-const axios = require("axios")
 
 /**
  *
@@ -26,23 +25,3 @@ const getProductsMiddleware = async (req, res, next) => {
 }
 
 export default getProductsMiddleware
-
-const getProductsMiddleware2 = async (req, res, next) => {
-	let data = []
-	let status = 400
-	//con axios a https://fakestoreapi.com/products
-	await axios
-		.get("https://fakestoreapi.com/products")
-		.then(function (response) {
-			data = response.data
-			status = 200
-		})
-		.catch(function (error) {
-			console.log(error)
-		})
-		.finally(function () {
-			req.dataToSend = data
-			req.statusCode = status
-		})
-	next()
-}

@@ -1,7 +1,10 @@
 "use strict"
 
+import session from "express-session"
+
 const { Users } = require("../../db/models/Users")
 const { validationResult } = require("express-validator")
+const bcrypt = require("bcrypt")
 
 const postLoginMiddleware = async (req, res, next) => {
 	const errors = validationResult(req)
@@ -23,12 +26,18 @@ const postLoginMiddleware = async (req, res, next) => {
 		req.statusCode = 400
 		next()
 	} else {
-		console.log(userDB)
+		console.log(userDB.userpass)
 		console.log(body.userpass)
-		if (userDB.userpass === body.userpass) {
+
+		const isValid = bcrypt.compareSync(body.userpass, userDB.userpass)
+		if (isValid) {
 			console.log("usuario loggeado")
+			session.userid = userDB.username
+			session.userGerarquia = userDB.gerarquia
 			req.dataToSend = {
-				user: userDB.username,
+				username: userDB.username,
+				userpass: userDB.userpass,
+				usergerarquia: userDB.gerarquia,
 				message: "Usuario Loggeado Correctamente",
 				log: true,
 			}
@@ -41,6 +50,7 @@ const postLoginMiddleware = async (req, res, next) => {
 			}
 			req.statusCode = 400
 		}
+		console.log(session.userid, session.userGerarquia)
 		next()
 	}
 }

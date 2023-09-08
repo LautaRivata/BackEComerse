@@ -5,9 +5,10 @@ import {
 	getUsersByIdMiddleware,
 	postUsersMiddleware,
 	postLoginMiddleware,
+	getLogOutMiddleware,
 } from "../middlewares"
 import { postUsersController } from "../controllers"
-const { check, body, validationResult } = require("express-validator")
+const { body } = require("express-validator")
 
 const router = Router()
 
@@ -36,5 +37,7 @@ router.post(
 	postLoginMiddleware,
 	postUsersController
 )
+
+router.get("/logout", getLogOutMiddleware, postUsersController)
 
 export default usersRoutes
