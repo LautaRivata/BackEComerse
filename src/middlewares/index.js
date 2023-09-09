@@ -6,6 +6,8 @@ import postProductsMiddleware from "./postProducts.middleware"
 import postLoginMiddleware from "./postLogin.middleware"
 import postGenerarDBMiddleware from "./postGenerarDB.middleware"
 import getLogOutMiddleware from "./getLogOut.middleware"
+import putProductsMiddleware from "./putProducts.middleware"
+import delProductsMiddleware from "./delProducts.middleware"
 
 export {
 	getProductsMiddleware,
@@ -16,4 +18,6 @@ export {
 	postLoginMiddleware,
 	postGenerarDBMiddleware,
 	getLogOutMiddleware,
+	putProductsMiddleware,
+	delProductsMiddleware,
 }

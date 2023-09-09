@@ -1,7 +1,12 @@
 "use strict"
 
 import { Router } from "express"
-import { getProductsMiddleware, postProductsMiddleware } from "../middlewares"
+import {
+	getProductsMiddleware,
+	postProductsMiddleware,
+	putProductsMiddleware,
+	delProductsMiddleware,
+} from "../middlewares"
 import { getProductsController, postProductsController } from "../controllers"
 
 const router = Router()
@@ -13,4 +18,9 @@ const productsRoutes = router.get(
 )
 
 router.post("/", postProductsMiddleware, postProductsController)
+
+router.put("/", putProductsMiddleware, postProductsController)
+
+router.delete("/", delProductsMiddleware, postProductsController)
+
 export default productsRoutes

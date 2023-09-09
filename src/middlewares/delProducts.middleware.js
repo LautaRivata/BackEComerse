@@ -2,11 +2,12 @@
 
 import { Products } from "../../db/models/Products"
 
-const postProductsMiddleware = async (req, res, next) => {
+const delProductsMiddleware = async (req, res, next) => {
 	let editProduct = req.body
 	try {
-		await Products.create(editProduct)
-		req.dataToSend = { message: "Producto Creado Correctamente" }
+		const delDB = await Products.findByPk(editProduct.id)
+		delDB.destroy()
+		req.dataToSend = { message: "Producto Eliminado Correctamente" }
 		req.statusCode = 200
 	} catch (err) {
 		console.log(err)
@@ -15,4 +16,4 @@ const postProductsMiddleware = async (req, res, next) => {
 	}
 	next()
 }
-export default postProductsMiddleware
+export default delProductsMiddleware
