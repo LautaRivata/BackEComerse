@@ -1,11 +1,9 @@
-# FAKE-MINIMALIST-SERVER
+Proyecto Final ICARO
 
-Charactesristics:
+ByTupak...
 
--   ESModules
--   Babel
--   JS (non Typescript server)
 
-## Initial route
-
-    http://localhost:41003/fake-service
+Nota:
+==> Base de datos tipo: MySQL
+==> Nombre de DataBase: "proyectofinal"
+==> Inicializacion: "http://localhost:8080/api/generarDB" METODO: "POST"
