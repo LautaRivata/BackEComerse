@@ -7,6 +7,7 @@ import {
 	productsRoutes,
 	usersRoutes,
 	generarDBRoutes,
+	carritosRoutes,
 } from "./routes"
 import { sequelize } from "../db/conection"
 
@@ -17,6 +18,8 @@ const cors = require("cors")
 const path = require("path")
 const Products = require("../db/models/Products")
 const Users = require("../db/models/Users")
+const OrdersDetails = require("../db/models/OrdersDetails")
+const OrdersLists = require("../db/models/OrdersLists")
 
 const app = express()
 const PORT = 8080
@@ -44,6 +47,7 @@ app.use("/api/products", productsRoutes)
 app.use("/api/orders", ordersRoutes)
 app.use("/api/users", usersRoutes)
 app.use("/api/generarDB", generarDBRoutes)
+app.use("/api/carritos", carritosRoutes)
 
 app.listen(PORT, () => {
 	console.log("Listening in port", PORT)
@@ -52,8 +56,8 @@ app.listen(PORT, () => {
 		.then(() => {
 			console.log("DBConectada")
 		})
-		.catch(() => {
+		.catch(err => {
 			console.log("Error en DB")
+			console.log(err)
 		})
-	console.log(session.user)
 })

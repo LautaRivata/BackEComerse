@@ -1,7 +1,8 @@
 "use strict"
+import session from "express-session"
 
 const getLogOutMiddleware = (req, res, next) => {
-	req.session.destroy(function (err) {
+	session.destroy(function (err) {
 		console.log(err)
 	})
 	req.dataToSend = { message: "LogOut Correcto" }

@@ -1,7 +1,6 @@
 "use strict"
-
-import { OrdersModel } from "../models"
-import { sleep, peek } from "../utils"
+import { OrdersDetails } from "../../db/models/OrdersDetails"
+import { OrdersLists } from "../../db/models/OrdersLists"
 
 /**
  *
@@ -12,9 +11,39 @@ import { sleep, peek } from "../utils"
 
 const getOrderById = async (req, res, next) => {
 	const { id } = req.params
-
-	req.dataToSend = {}
-	req.statusCode = 200
+	if (id != null) {
+		try {
+			const orderGet = await OrdersDetails.findByPk(id)
+			if (orderGet.id == null) {
+				req.dataToSend = { message: "La Orden No Existe" }
+				req.statusCode = 400
+			} else {
+				const orderlist = await OrdersLists.findAll({
+					where: { orderid: orderGet.id },
+				})
+				req.dataToSend = {
+					ordersList: orderlist,
+				}
+				req.statusCode = 200
+			}
+		} catch (err) {
+			console.log(err)
+			req.dataToSend = { message: "La Orden No Existe" }
+			req.statusCode = 400
+		}
+	} else {
+		try {
+			const orderGet = await OrdersDetails.findAll()
+			req.dataToSend = {
+				ordersDetails: orderGet,
+			}
+			req.statusCode = 200
+		} catch (err) {
+			console.log(err)
+			req.dataToSend = { message: "Algo Salio Mal con la DB" }
+			req.statusCode = 400
+		}
+	}
 	next()
 }
 

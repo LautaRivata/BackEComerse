@@ -8,7 +8,7 @@ import { getOrderById } from "../hackaton-utilities"
 const router = Router()
 
 const ordersRoutes = router
-	.get("/:id", getOrderById, getOrderByIdController)
+	.get("/:id?", getOrderById, getOrderByIdController)
 	.post("/", postOrderMiddleware, postOrderController)
 
 export default ordersRoutes

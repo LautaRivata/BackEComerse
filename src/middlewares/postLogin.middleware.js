@@ -32,9 +32,11 @@ const postLoginMiddleware = async (req, res, next) => {
 		const isValid = bcrypt.compareSync(body.userpass, userDB.userpass)
 		if (isValid) {
 			console.log("usuario loggeado")
-			session.userid = userDB.username
+			session.userid = userDB.idusers
+			session.username = userDB.username
 			session.userGerarquia = userDB.gerarquia
 			req.dataToSend = {
+				userID: userDB.idusers,
 				username: userDB.username,
 				userpass: userDB.userpass,
 				usergerarquia: userDB.gerarquia,
