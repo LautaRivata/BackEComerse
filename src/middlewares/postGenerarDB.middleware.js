@@ -226,11 +226,22 @@ const postGenerarDBMiddleware = async function (req, res, next) {
 			views: "145",
 		},
 	]
+	const tupak = {
+		username: "Claudio",
+		userpass:
+			"$2a$10$eu6R3pAaFHpHSA9bFHDWGO1rvgonAiZI1ddOd1NCo5744ZcSUEj.S",
+		name: "Claudio",
+		email: "Claudio@mail.com",
+		telephone: "3515184238",
+		address: "La Casa de Claudio 1234",
+		isEnabled: true,
+		gerarquia: 1,
+	}
 	const admin = {
-		idusers: 1,
-		username: "Admin",
-		userpass: "admin",
-		name: "Admin",
+		username: "Lucio",
+		userpass:
+			"$2a$10$hYgfLmvx/9qDPZkpWgTwneyiqAS7mnGF41I.RPngK5LdF3AlJ/aY6",
+		name: "Lucio",
 		email: "Admin@mail.com",
 		telephone: "3515184238",
 		address: "La Casa del Admin 1234",
@@ -241,6 +252,7 @@ const postGenerarDBMiddleware = async function (req, res, next) {
 		await Products.create(products[i])
 	}
 	await Users.create(admin)
+	await Users.create(tupak)
 
 	req.dataToSend = { message: "Data Base Generada Correctamente" }
 	req.statusCode = 200
